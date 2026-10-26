@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8f8377">
+  <title>کارت دعوت عروسی آیناز و فرزاد</title>
+  <style>
+    @font-face {
+      font-family: "B Homa";
+      src: url("assets/B-Homa.woff2") format("woff2");
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Alex Brush";
+      src: url("assets/AlexBrush-Regular.woff2") format("woff2");
+      font-display: swap;
+    }
+
+    :root {
+      color-scheme: light;
+      --ink: #4d504a;
+      --muted: #88847e;
+      --taupe: #948579;
+      --taupe-dark: #665c53;
+      --gold: #c4a66c;
+      --gold-light: #f2e4c3;
+      --cream: #f8f5ee;
+      --paper: #eee9e0;
+      --font-fa: "B Homa", Tahoma, sans-serif;
+      --font-en: "Alex Brush", Georgia, serif;
+      font-synthesis: none;
+      scroll-behavior: smooth;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--cream);
+      scroll-padding-top: 24px;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-fa);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    body.cover-active {
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button,
+    a,
+    input,
+    select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .envelope {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #e9e4db;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 900ms ease, visibility 900ms ease;
+    }
+
+    .envelope.is-fading {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope__stage {
+      position: relative;
+      width: min(100vw, 425px);
+      height: 100%;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      background: #e9e4db;
+    }
+
+    .envelope__door,
+    .envelope__seal {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .envelope__door {
+      z-index: 2;
+      transition: transform 5.2s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+
+    .envelope__door--left {
+      z-index: 3;
+    }
+
+    .envelope__door img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .envelope__seal {
+      z-index: 4;
+      display: grid;
+      place-items: center;
+      transition: opacity 1.2s ease;
+    }
+
+    .envelope__seal img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .envelope__hint {
+      position: absolute;
+      z-index: 5;
+      right: 0;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      left: 0;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 13px;
+      text-align: center;
+      text-shadow: 0 1px 8px rgba(32, 27, 23, 0.5);
+      pointer-events: none;
+      animation: hint-pulse 2.4s ease-in-out infinite;
+    }
+
+    .envelope__trigger {
+      position: absolute;
+      z-index: 6;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .envelope.is-opening .envelope__door--left {
+      transform: translateX(-105%);
+    }
+
+    .envelope.is-opening .envelope__door--right {
+      transform: translateX(105%);
+    }
+
+    .envelope.is-opening .envelope__seal {
+      opacity: 0;
+    }
+
+    .envelope.is-opening .envelope__hint {
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.65; }
+      50% { opacity: 1; }
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 680px;
+      height: 100svh;
+      max-height: 1100px;
+      overflow: hidden;
+      place-items: center;
+      isolation: isolate;
+      background: #877c70;
+    }
+
+    .hero__photo,
+    .hero__shade {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+    }
+
+    /* Empty cover-photo slot. Replace this layer with the couple's photo later. */
+    .hero__photo {
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(241, 229, 211, 0.82) 0, rgba(210, 196, 176, 0.25) 34%, transparent 68%),
+        radial-gradient(ellipse at 18% 70%, rgba(203, 190, 170, 0.55) 0, transparent 36%),
+        radial-gradient(ellipse at 84% 66%, rgba(90, 81, 71, 0.42) 0, transparent 42%),
+        linear-gradient(145deg, #d2c8ba 0%, #a69a8b 42%, #6f665c 100%);
+      transform: scale(1.02);
+    }
+
+    .hero__shade {
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(30, 27, 23, 0.15), rgba(30, 27, 23, 0.39));
+    }
+
+    .hero__drape {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .hero__drape img {
+      display: block;
+      width: auto;
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: center top;
+    }
+
+    .hero__names,
+    .hero__title {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      display: block;
+      height: auto;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 2px 9px rgba(34, 29, 25, 0.24));
+      pointer-events: none;
+    }
+
+    .hero__names {
+      top: 23%;
+      width: min(56vw, 450px);
+    }
+
+    .hero__title {
+      top: 38%;
+      width: min(61vw, 425px);
+    }
+
+    .hero__scroll {
+      position: absolute;
+      z-index: 2;
+      bottom: max(26px, env(safe-area-inset-bottom));
+      left: 50%;
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      color: white;
+      text-decoration: none;
+      transform: translateX(-50%);
+      animation: float-down 2s ease-in-out infinite;
+    }
+
+    .hero__scroll svg {
+      width: 27px;
+      height: 27px;
+      fill: currentColor;
+    }
+
+    @keyframes float-down {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 9px); }
+    }
+
+    .countdown {
+      position: relative;
+      padding: 86px 22px 94px;
+      overflow: hidden;
+      background: #948579;
+      color: #fff;
+      text-align: center;
+    }
+
+    .countdown__inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 940px);
+      margin: 0 auto;
+    }
+
+    .countdown__heading {
+      margin: 0;
+      color: #fff;
+      font-family: var(--font-en);
+      font-size: clamp(40px, 5vw, 52px);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: 2px;
+      text-transform: capitalize;
+    }
+
+    .countdown__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 126px));
+      justify-content: center;
+      gap: 18px;
+      margin: 30px auto 37px;
+      direction: ltr;
+    }
+
+    .countdown__item {
+      display: flex;
+      min-height: 142px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 16px 18px;
+      background: rgba(93, 81, 69, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .countdown__number {
+      color: #fff;
+      font-family: "Times New Roman", serif;
+      font-size: clamp(34px, 4vw, 44px);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .countdown__label {
+      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .event-date {
+      display: grid;
+      grid-template-columns: minmax(30px, 1fr) auto minmax(30px, 1fr);
+      align-items: center;
+      gap: 22px;
+      width: min(100%, 760px);
+      margin: 0 auto;
+      direction: ltr;
+    }
+
+    .event-date__line {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .event-date__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: #fff;
+      font-family: "Times New Roman", serif;
+      font-size: 25px;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .event-date__content img {
+      display: block;
+      width: 170px;
+      max-width: 45vw;
+      height: auto;
+      opacity: 0.88;
+    }
+
+    .story {
+      position: relative;
+      min-height: 780px;
+      overflow: hidden;
+      background-color: #f5f1e9;
+      background-image: url("assets/paper-garden.png");
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+    }
+
+    .story__inner {
+      position: relative;
+      width: min(100%, 940px);
+      min-height: inherit;
+      margin: 0 auto;
+    }
+
+    .portrait-frame {
+      position: absolute;
+      top: 45px;
+      left: 50%;
+      width: min(33vw, 310px);
+      aspect-ratio: 0.89;
+      padding: 12px;
+      border: 7px solid #c4a66c;
+      border-radius: 48% / 45%;
+      background: linear-gradient(135deg, #f3e7ca, #b28b4e 40%, #ead9ad 67%, #b28b4e);
+      box-shadow: 0 10px 28px rgba(78, 66, 50, 0.2), inset 0 0 0 3px rgba(255, 250, 234, 0.8);
+      transform: translateX(-50%);
+    }
+
+    .portrait-frame::before {
+      position: absolute;
+      z-index: 2;
+      inset: -13px;
+      border: 5px dotted #f7e9c8;
+      border-radius: inherit;
+      content: "";
+      filter: drop-shadow(0 1px 1px rgba(98, 75, 39, 0.65));
+      pointer-events: none;
+    }
+
+    .portrait-frame::after {
+      position: absolute;
+      z-index: 2;
+      inset: -5px;
+      border: 1px solid rgba(111, 79, 37, 0.7);
+      border-radius: inherit;
+      content: "";
+      pointer-events: none;
+    }
+
+    .portrait-frame__photo {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      overflow: hidden;
+      border: 3px solid rgba(255, 250, 236, 0.94);
+      border-radius: inherit;
+      background:
+        radial-gradient(ellipse at 50% 38%, rgba(244, 239, 228, 0.88), transparent 44%),
+        linear-gradient(145deg, #938778, #d2c8b9 48%, #7c7165);
+      color: rgba(255, 255, 255, 0.88);
+      text-align: center;
+    }
+
+    .portrait-frame__placeholder {
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      font-size: 13px;
+      text-shadow: 0 1px 5px rgba(36, 32, 27, 0.4);
+    }
+
+    .portrait-frame__placeholder svg {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.5;
+    }
+
+    .story__quote {
+      position: absolute;
+      top: 330px;
+      left: 50%;
+      display: block;
+      width: min(92%, 840px);
+      height: auto;
+      transform: translateX(-50%);
+    }
+
+    .welcome-strip {
+      position: relative;
+      display: grid;
+      min-height: 260px;
+      place-items: center;
+      padding: 42px 20px;
+      overflow: hidden;
+      background-color: #81766b;
+      background-image: url("assets/paper-frame.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .welcome-strip::before {
+      position: absolute;
+      inset: 0;
+      background: rgba(65, 56, 48, 0.18);
+      content: "";
+    }
+
+    .welcome-strip img {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: min(82%, 768px);
+      height: auto;
+    }
+
+    .details {
+      position: relative;
+      z-index: 2;
+      width: min(100% - 36px, 980px);
+      margin: -35px auto 0;
+      padding: 50px 42px 54px;
+      background-color: #f8f6f0;
+      background-image: url("assets/paper-pearl.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 0 12px 32px rgba(78, 66, 50, 0.1);
+    }
+
+    .details__title {
+      margin: 0;
+      color: #525252;
+      font-size: 34px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      text-align: center;
+    }
+
+    .details__ornament {
+      display: block;
+      width: 170px;
+      height: auto;
+      margin: -2px auto 30px;
+    }
+
+    .details__grid {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr 1fr;
+      align-items: start;
+      gap: 22px;
+    }
+
+    .detail-card {
+      min-height: 205px;
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    .detail-card + .detail-card {
+      border-inline-start: 1px solid rgba(148, 133, 121, 0.24);
+    }
+
+    .detail-card__icon {
+      display: block;
+      width: 28px;
+      height: 28px;
+      margin: 0 auto 9px;
+      fill: none;
+      stroke: #685d51;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .detail-card h3 {
+      margin: 3px 0 8px;
+      color: #4d504a;
+      font-size: 23px;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    .detail-card p {
+      margin: 0;
+      color: #89847e;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .directions {
+      position: relative;
+      display: grid;
+      min-height: 280px;
+      place-items: center;
+      padding: 55px 22px 65px;
+      overflow: hidden;
+      background-color: #81766b;
+      background-image: url("assets/paper-frame.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+    }
+
+    .directions::before {
+      position: absolute;
+      inset: 0;
+      background: rgba(65, 56, 48, 0.68);
+      content: "";
+    }
+
+    .directions__inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .directions h2 {
+      margin: 0 0 2px;
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    .directions p {
+      margin: 0 0 20px;
+      font-size: 19px;
+    }
+
+    .directions__links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      direction: ltr;
+    }
+
+    .directions__link {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 14px rgba(28, 24, 21, 0.2);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .directions__link:hover,
+    .directions__link:focus-visible {
+      box-shadow: 0 7px 20px rgba(28, 24, 21, 0.28);
+      transform: translateY(-3px);
+    }
+
+    .directions__link img {
+      display: block;
+      width: 64%;
+      height: 64%;
+      object-fit: contain;
+    }
+
+    .rsvp {
+      position: relative;
+      padding: 62px 20px 80px;
+      background-color: #f7f4ec;
+      background-image: url("assets/paper-bow.png");
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .rsvp__inner {
+      width: min(100%, 560px);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .rsvp__intro {
+      margin: 0 0 8px;
+      color: #383737;
+      font-size: 22px;
+      line-height: 1.75;
+    }
+
+    .rsvp__signoff {
+      margin: 18px 0 24px;
+      color: #4d504a;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .rsvp__form {
+      display: grid;
+      gap: 16px;
+      padding: 28px;
+      border: 1px solid rgba(148, 133, 121, 0.22);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 12px 35px rgba(78, 66, 50, 0.09);
+      text-align: right;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .form-field label {
+      color: #625b53;
+      font-size: 16px;
+    }
+
+    .form-field input,
+    .form-field select {
+      width: 100%;
+      min-height: 48px;
+      padding: 9px 13px;
+      border: 1px solid #ded8cf;
+      border-radius: 4px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.94);
+      color: #4d504a;
+      text-align: right;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: #a78556;
+      box-shadow: 0 0 0 3px rgba(167, 133, 86, 0.15);
+    }
+
+    .rsvp__submit {
+      min-height: 55px;
+      margin-top: 4px;
+      padding: 12px 28px;
+      border: 0;
+      border-radius: 4px;
+      background: #84796e;
+      color: #fff;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .rsvp__submit:hover,
+    .rsvp__submit:focus-visible {
+      background: #6f6255;
+      transform: translateY(-1px);
+    }
+
+    .rsvp__success {
+      margin: 0;
+      padding: 11px 14px;
+      border: 1px solid rgba(76, 110, 83, 0.25);
+      border-radius: 4px;
+      background: rgba(225, 238, 224, 0.9);
+      color: #48634a;
+      text-align: center;
+    }
+
+    .rsvp__success[hidden] {
+      display: none;
+    }
+
+    .closing {
+      position: relative;
+      display: grid;
+      min-height: 610px;
+      align-content: center;
+      justify-items: center;
+      padding: 80px 22px 92px;
+      overflow: hidden;
+      background-color: #80746a;
+      background-image: url("assets/paper-torn-brown.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+    }
+
+    .closing::before {
+      position: absolute;
+      inset: 0;
+      background: rgba(53, 47, 41, 0.28);
+      content: "";
+    }
+
+    .closing__inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 780px);
+    }
+
+    .closing__mark {
+      display: block;
+      width: min(15vw, 92px);
+      min-width: 62px;
+      height: auto;
+      margin: 0 auto 12px;
+    }
+
+    .closing__message {
+      margin: 0 auto 24px;
+      font-size: 25px;
+      line-height: 1.8;
+    }
+
+    .closing__ornament {
+      display: block;
+      width: min(80%, 540px);
+      height: auto;
+      margin: 0 auto 22px;
+      opacity: 0.88;
+    }
+
+    .closing__family {
+      margin: 0 0 14px;
+      font-size: 22px;
+      line-height: 1.6;
+    }
+
+    .closing__names {
+      margin: 7px 0 11px;
+      direction: ltr;
+      font-family: var(--font-en);
+      font-size: clamp(34px, 5vw, 46px);
+      letter-spacing: 1px;
+      line-height: 1.3;
+    }
+
+    .closing__english {
+      margin: 0 auto;
+      direction: ltr;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      display: grid;
+      min-height: 150px;
+      place-items: center;
+      padding: 25px 20px;
+      background: #fff;
+    }
+
+    .footer img {
+      display: block;
+      width: min(100%, 700px);
+      height: auto;
+    }
+
+    .music-control {
+      position: fixed;
+      z-index: 999;
+      right: 20px;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      display: grid;
+      width: 55px;
+      height: 55px;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 300ms ease, visibility 300ms ease, transform 180ms ease;
+      user-select: none;
+    }
+
+    .music-control.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .music-control:hover,
+    .music-control:focus-visible {
+      transform: scale(1.06);
+    }
+
+    :focus-visible {
+      outline: 2px solid #7d6748;
+      outline-offset: 4px;
+    }
+
+    @media (min-width: 768px) {
+      .hero__names {
+        top: 17%;
+        width: min(48vw, 700px);
+      }
+
+      .hero__title {
+        top: 37%;
+        width: min(36vw, 500px);
+      }
+
+      .countdown {
+        padding-top: 115px;
+        padding-bottom: 125px;
+        background-image: url("assets/leaf-ornament.png");
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: min(100%, 1280px) auto;
+      }
+
+      .story {
+        min-height: 820px;
+      }
+
+      .story__quote {
+        top: 390px;
+      }
+
+      .welcome-strip {
+        min-height: 300px;
+      }
+
+      .details {
+        margin-top: -70px;
+        padding: 65px 58px 70px;
+      }
+
+      .rsvp {
+        padding-top: 100px;
+        padding-bottom: 110px;
+      }
+
+      .closing {
+        min-height: 670px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      body {
+        font-size: 16px;
+      }
+
+      .hero {
+        min-height: 620px;
+        height: 100svh;
+      }
+
+      .hero__names {
+        top: 25.4%;
+        width: 47%;
+      }
+
+      .hero__title {
+        top: 37.1%;
+        width: 57%;
+      }
+
+      .countdown {
+        padding: 54px 14px 61px;
+        background-image: url("assets/paper-brown.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .countdown__heading {
+        font-size: 35px;
+        letter-spacing: 0;
+      }
+
+      .countdown__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 5px;
+        margin: 20px auto 24px;
+      }
+
+      .countdown__item {
+        min-height: 103px;
+        padding: 14px 6px 12px;
+        background: rgba(112, 96, 80, 0.38);
+      }
+
+      .countdown__number {
+        font-size: 35px;
+      }
+
+      .countdown__label {
+        margin-top: 7px;
+        font-size: 11px;
+        letter-spacing: 0;
+      }
+
+      .event-date {
+        gap: 12px;
+      }
+
+      .event-date__content {
+        font-size: 22px;
+      }
+
+      .story {
+        min-height: 735px;
+        background-image: url("assets/paper-garden.png");
+        background-position: center top;
+        background-size: cover;
+      }
+
+      .portrait-frame {
+        top: 38px;
+        width: min(51vw, 245px);
+        padding: 9px;
+        border-width: 5px;
+      }
+
+      .portrait-frame::before {
+        inset: -10px;
+        border-width: 4px;
+      }
+
+      .portrait-frame__photo {
+        border-width: 2px;
+      }
+
+      .portrait-frame__placeholder {
+        gap: 3px;
+        font-size: 12px;
+      }
+
+      .portrait-frame__placeholder svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .story__quote {
+        top: clamp(255px, 34vh, 310px);
+        width: 95%;
+      }
+
+      .welcome-strip {
+        min-height: 205px;
+        padding: 32px 18px;
+      }
+
+      .welcome-strip img {
+        width: 94%;
+      }
+
+      .details {
+        width: min(100% - 20px, 500px);
+        margin-top: -15px;
+        padding: 42px 18px 36px;
+        background-image: url("assets/paper-pearl.png");
+      }
+
+      .details__title {
+        font-size: 27px;
+      }
+
+      .details__ornament {
+        width: 130px;
+        margin-bottom: 17px;
+      }
+
+      .details__grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .detail-card {
+        min-height: 0;
+        padding: 15px 12px 19px;
+      }
+
+      .detail-card + .detail-card {
+        border-top: 1px solid rgba(148, 133, 121, 0.24);
+        border-inline-start: 0;
+      }
+
+      .detail-card__icon {
+        width: 25px;
+        height: 25px;
+        margin-bottom: 5px;
+      }
+
+      .detail-card h3 {
+        margin: 2px 0 5px;
+        font-size: 20px;
+      }
+
+      .detail-card p {
+        font-size: 15px;
+      }
+
+      .directions {
+        min-height: 235px;
+        padding: 44px 15px 52px;
+        background-image: url("assets/paper-frame.png");
+      }
+
+      .directions h2 {
+        font-size: 25px;
+      }
+
+      .directions p {
+        margin-bottom: 16px;
+        font-size: 16px;
+      }
+
+      .directions__links {
+        gap: 12px;
+      }
+
+      .directions__link {
+        width: 49px;
+        height: 49px;
+        border-radius: 10px;
+      }
+
+      .rsvp {
+        padding: 52px 14px 65px;
+        background-image: url("assets/paper-bow.png");
+      }
+
+      .rsvp__intro {
+        font-size: 18px;
+      }
+
+      .rsvp__signoff {
+        margin: 13px 0 19px;
+        font-size: 17px;
+      }
+
+      .rsvp__form {
+        gap: 13px;
+        padding: 20px 16px;
+      }
+
+      .form-field label {
+        font-size: 15px;
+      }
+
+      .form-field input,
+      .form-field select {
+        min-height: 46px;
+        font-size: 15px;
+      }
+
+      .closing {
+        min-height: 570px;
+        padding: 68px 17px 78px;
+        background-image: url("assets/paper-torn-brown.png");
+      }
+
+      .closing__message {
+        margin-bottom: 18px;
+        font-size: 21px;
+      }
+
+      .closing__ornament {
+        width: 86%;
+        margin-bottom: 15px;
+      }
+
+      .closing__family {
+        font-size: 19px;
+      }
+
+      .closing__english {
+        max-width: 340px;
+        font-size: 13px;
+      }
+
+      .footer {
+        min-height: 110px;
+        padding: 20px 14px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .countdown__number {
+        font-size: 31px;
+      }
+
+      .countdown__label {
+        font-size: 10px;
+      }
+
+      .event-date {
+        gap: 8px;
+      }
+
+      .event-date__content {
+        font-size: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="cover-active">
+  <div class="envelope" id="envelope" aria-label="پاکت دعوت&zwnj;نامه">
+    <div class="envelope__stage">
+      <div class="envelope__door envelope__door--right" aria-hidden="true">
+        <img src="assets/envelope-right.png" alt="">
+      </div>
+      <div class="envelope__door envelope__door--left" aria-hidden="true">
+        <img src="assets/envelope-left.png" alt="">
+      </div>
+      <div class="envelope__seal" aria-hidden="true">
+        <img src="assets/seal.png" alt="">
+      </div>
+      <p class="envelope__hint">برای باز کردن دعوت&zwnj;نامه کلیک کنید</p>
+      <button class="envelope__trigger" id="open-envelope" type="button" aria-label="باز کردن دعوت&zwnj;نامه"></button>
+    </div>
+  </div>
+
+  <main id="invitation">
+    <section class="hero" id="home" aria-label="دعوت&zwnj;نامه عروسی آیناز و فرزاد">
+      <!-- PHOTO SLOT: add the main couple photo as the hero background here. -->
+      <div class="hero__photo" data-photo-slot="cover" role="img" aria-label="جای عکس اصلی عروس و داماد"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__drape" aria-hidden="true">
+        <img src="assets/hero-drape.png" alt="">
+      </div>
+      <img class="hero__names" src="assets/hero-names.png" alt="آیناز و فرزاد">
+      <img class="hero__title" src="assets/hero-title.png" alt="دعوت&zwnj;نامه عروسی">
+      <a class="hero__scroll" href="#countdown" aria-label="رفتن به ادامه دعوت&zwnj;نامه">
+        <svg viewBox="0 0 320 512" aria-hidden="true"><path d="M143 256.3 7 120.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0L313 86.3c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.4 9.5-24.6 9.5-34 .1zm34 192 136-136c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.4-9.4-24.6-9.4-33.9 0L160 352.1l-96.4-96.4c-9.4-9.4-24.6-9.4-33.9 0L7 278.3c-9.4 9.4-9.4 24.6 0 33.9l136 136c9.5 9.5 24.6 9.5 34 .1z"></path></svg>
+      </a>
+    </section>
+
+    <section class="countdown" id="countdown" aria-labelledby="countdown-title">
+      <div class="countdown__inner">
+        <h1 class="countdown__heading" id="countdown-title">the celebration begins in</h1>
+        <div class="countdown__grid" data-countdown data-date="1790870520" aria-label="شمارش معکوس تا مراسم">
+          <div class="countdown__item"><span class="countdown__number" data-unit="days">00</span><span class="countdown__label">روزها</span></div>
+          <div class="countdown__item"><span class="countdown__number" data-unit="hours">00</span><span class="countdown__label">ساعت</span></div>
+          <div class="countdown__item"><span class="countdown__number" data-unit="minutes">00</span><span class="countdown__label">دقیقه</span></div>
+          <div class="countdown__item"><span class="countdown__number" data-unit="seconds">00</span><span class="countdown__label">ثانیه</span></div>
+        </div>
+        <div class="event-date" dir="ltr">
+          <span class="event-date__line" aria-hidden="true"></span>
+          <div class="event-date__content">
+            <time datetime="2026-10-01">01/10/2026</time>
+            <img src="assets/ornament.png" alt="" aria-hidden="true">
+          </div>
+          <span class="event-date__line" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="story" aria-label="خاطره&zwnj;ای از آیناز و فرزاد">
+      <div class="story__inner">
+        <!-- PHOTO SLOT: replace the empty oval with the couple's portrait when it is ready. -->
+        <div class="portrait-frame" data-photo-slot="portrait" role="img" aria-label="جای عکس پرتره عروس و داماد">
+          <div class="portrait-frame__photo">
+            <span class="portrait-frame__placeholder" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 7.5h3l1.3-2h7.4l1.3 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+              <span>جای عکس</span>
+            </span>
+          </div>
+        </div>
+        <img class="story__quote" src="assets/love-poem.png" alt="دعوت&zwnj;نامه&zwnj;ای از طرف آیناز و فرزاد">
+      </div>
+    </section>
+
+    <section class="welcome-strip" aria-label="پیام خوش&zwnj;آمدگویی">
+      <img src="assets/welcome-note.png" alt="پیام خوش&zwnj;آمدگویی آیناز و فرزاد">
+    </section>
+
+    <section class="details" id="details" aria-labelledby="details-title">
+      <h2 class="details__title" id="details-title">موعد دیدار ما</h2>
+      <img class="details__ornament" src="assets/ornament.png" alt="" aria-hidden="true">
+      <div class="details__grid">
+        <article class="detail-card">
+          <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path><path d="M7 14h3M7 17h3"></path></svg>
+          <h3>تاریخ مراسم:</h3>
+          <p>پنجشنبه، 9 مهر ماه، 1405</p>
+        </article>
+        <article class="detail-card">
+          <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
+          <h3>ساعت مراسم:</h3>
+          <p dir="rtl">19:00 تا خاموشی ستارگان</p>
+        </article>
+        <article class="detail-card">
+          <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+          <h3>باغ عمارت سران<br>(دیاموند سابق)</h3>
+          <p>اتوبان آزادگان شمال به جنوب، خروجی فتح غرب، لاین کندرو به سمت احمدآباد مستوفی، نرسیده به میدان پیامبر، خیابان بسیج، کوچه الماس، پلاک ۱۱۰</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="directions" aria-labelledby="directions-title">
+      <div class="directions__inner">
+        <h2 id="directions-title">مسیر&zwnj;یابی</h2>
+        <p>اپلیکیشن مورد نظرتان را انتخاب کنید</p>
+        <nav class="directions__links" aria-label="انتخاب اپلیکیشن مسیریابی">
+          <a class="directions__link" href="https://maps.app.goo.gl/3XtwUQcX7cj7JQm26" target="_blank" rel="noopener noreferrer" aria-label="باز کردن مسیر در گوگل مپ"><img src="assets/google-maps.png" alt=""></a>
+          <a class="directions__link" href="https://nshn.ir/rbvbORIxjswQ" target="_blank" rel="noopener noreferrer" aria-label="باز کردن مسیر در نشان"><img src="assets/neshan.png" alt=""></a>
+          <a class="directions__link" href="https://balad.ir/location?latitude=35.662304&amp;longitude=51.204437&amp;zoom=16.500000" target="_blank" rel="noopener noreferrer" aria-label="باز کردن مسیر در بلد"><img src="assets/balad.png" alt=""></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
+      <div class="rsvp__inner">
+        <h2 class="rsvp__intro" id="rsvp-title">لطفا جهت هماهنگی هرچه بهتر،<br>حضور یا عدم حضور خود را از طریق فرم زیر به ما اطلاع دهید.</h2>
+        <p class="rsvp__signoff">با مهر و احترام<br>آیناز – فرزاد</p>
+        <form class="rsvp__form" id="attendance-form">
+          <div class="form-field">
+            <label for="guest-name">نام و نام خانوادگی</label>
+            <input id="guest-name" name="guestName" type="text" autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="guest-count">تعداد مهمان&zwnj;ها</label>
+            <select id="guest-count" name="guestCount">
+              <option value="">- Select -</option>
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="attendance-status">اعلام حضور مهمان&zwnj;ها</label>
+            <select id="attendance-status" name="attendanceStatus">
+              <option value="yes">حضور خواهم/خواهیم داشت</option>
+              <option value="no">نمی&zwnj;توانم/نمی&zwnj;توانیم حضور داشته باشم/باشیم</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="guest-message">پیغام</label>
+            <input id="guest-message" name="message" type="text">
+          </div>
+          <button class="rsvp__submit" type="submit" aria-label="ثبت پاسخ حضور">ATTEND</button>
+          <p class="rsvp__success" id="rsvp-success" role="status" hidden>ممنون از اینکه پاسخ حضور خود را با ما در میان گذاشتید.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="closing__inner">
+        <img class="closing__mark" src="assets/couple-mark.png" alt="نشان آیناز و فرزاد">
+        <h2 class="closing__message" id="closing-title">بی&zwnj;صبرانه منتظر دیدار شما و ثبت خاطره&zwnj;ای زیبا در کنار عزیزانمان هستیم.</h2>
+        <img class="closing__ornament" src="assets/ornament.png" alt="" aria-hidden="true">
+        <p class="closing__family">با مهر<br>لطفی - شمشیرگران</p>
+        <p class="closing__names">Aynaz &amp; Farzad</p>
+        <p class="closing__english">We look forward to celebrating this special occasion with you.</p>
+      </div>
+    </section>
+
+  <footer class="footer">
+      <img src="assets/footer-contact.png" alt="راه&zwnj;های ارتباطی کارت دیجیتال کیمیان">
+    </footer>
+  </main>
+
+  <audio id="invite-music" preload="none" loop src="https://kimiancards.ir/wp-content/uploads/2025/12/Arman-Garshasbi-_-Benshin-320.mp3"></audio>
+  <button class="music-control" id="music-control" type="button" aria-label="پخش موسیقی" aria-pressed="false">▶</button>
+
+  <script>
+    (() => {
+      const envelope = document.getElementById("envelope");
+      const openButton = document.getElementById("open-envelope");
+      const music = document.getElementById("invite-music");
+      const musicButton = document.getElementById("music-control");
+      let envelopeOpened = false;
+
+      function playMusic() {
+        if (!music) return;
+        music.play().then(() => {
+          musicButton.textContent = "⏸";
+          musicButton.setAttribute("aria-label", "توقف موسیقی");
+          musicButton.setAttribute("aria-pressed", "true");
+        }).catch(() => {
+          musicButton.textContent = "▶";
+          musicButton.setAttribute("aria-label", "پخش موسیقی");
+          musicButton.setAttribute("aria-pressed", "false");
+        });
+      }
+
+      function pauseMusic() {
+        if (!music) return;
+        music.pause();
+        musicButton.textContent = "▶";
+        musicButton.setAttribute("aria-label", "پخش موسیقی");
+        musicButton.setAttribute("aria-pressed", "false");
+      }
+
+      function openEnvelope() {
+        if (envelopeOpened) return;
+        envelopeOpened = true;
+        envelope.classList.add("is-opening");
+        document.body.classList.remove("cover-active");
+        musicButton.classList.add("is-visible");
+        playMusic();
+
+        window.setTimeout(() => envelope.classList.add("is-fading"), 4500);
+        window.setTimeout(() => envelope.remove(), 5500);
+      }
+
+      openButton.addEventListener("click", openEnvelope);
+      musicButton.addEventListener("click", () => {
+        if (music.paused) {
+          playMusic();
+        } else {
+          pauseMusic();
+        }
+      });
+
+      const countdown = document.querySelector("[data-countdown]");
+      if (countdown) {
+        const targetTime = Number(countdown.dataset.date) * 1000;
+        const units = {
+          days: countdown.querySelector('[data-unit="days"]'),
+          hours: countdown.querySelector('[data-unit="hours"]'),
+          minutes: countdown.querySelector('[data-unit="minutes"]'),
+          seconds: countdown.querySelector('[data-unit="seconds"]')
+        };
+
+        function updateCountdown() {
+          const remaining = Math.max(0, targetTime - Date.now());
+          const totalSeconds = Math.floor(remaining / 1000);
+          const values = {
+            days: Math.floor(totalSeconds / 86400),
+            hours: Math.floor((totalSeconds % 86400) / 3600),
+            minutes: Math.floor((totalSeconds % 3600) / 60),
+            seconds: totalSeconds % 60
+          };
+
+          Object.entries(values).forEach(([unit, value]) => {
+            if (units[unit]) units[unit].textContent = String(value).padStart(2, "0");
+          });
+        }
+
+        updateCountdown();
+        window.setInterval(updateCountdown, 1000);
+      }
+
+      const attendanceForm = document.getElementById("attendance-form");
+      const successMessage = document.getElementById("rsvp-success");
+      if (attendanceForm && successMessage) {
+        attendanceForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          successMessage.hidden = false;
+          attendanceForm.reset();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
