@@ -315,10 +315,14 @@
     }
 
     .countdown {
+      --slide-color: #948579;
+      --slide-image: none;
+      --slide-position: center;
+      --slide-repeat: no-repeat;
+      --slide-size: cover;
       position: relative;
       padding: 86px 22px 94px;
-      overflow: hidden;
-      background: #948579;
+      background: transparent;
       color: #fff;
       text-align: center;
     }
@@ -411,15 +415,56 @@
       opacity: 0.88;
     }
 
+    .torn-slide {
+      --slide-mask: url("assets/torn-top-wide.png");
+      --slide-overlap: clamp(40px, 2vw, 96px);
+      position: relative;
+      z-index: 1;
+      isolation: isolate;
+      margin-top: calc(0px - var(--slide-overlap));
+      padding-top: var(--slide-overlap);
+      background: transparent;
+    }
+
+    .torn-slide::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background-color: var(--slide-color, transparent);
+      background-image: var(--slide-image, none);
+      background-position: var(--slide-position, center);
+      background-repeat: var(--slide-repeat, no-repeat);
+      background-size: var(--slide-size, cover);
+      -webkit-mask-image: var(--slide-mask);
+      -webkit-mask-position: top center;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: 100% auto;
+      mask-image: var(--slide-mask);
+      mask-mode: alpha;
+      mask-position: top center;
+      mask-repeat: no-repeat;
+      mask-size: 100% auto;
+      content: "";
+      pointer-events: none;
+    }
+
+    .torn-slide--alternate {
+      --slide-mask: url("assets/torn-bottom-wide.png");
+    }
+
+    .story-stack {
+      --slide-color: #f5f1e9;
+      --slide-image: url("assets/paper-ivory.webp");
+      --slide-position: center top;
+      --slide-repeat: no-repeat;
+      --slide-size: cover;
+    }
+
     .story {
       position: relative;
       min-height: 780px;
       overflow: hidden;
-      background-color: #f5f1e9;
-      background-image: url("assets/paper-garden.png");
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: cover;
+      background: transparent;
     }
 
     .story__inner {
@@ -510,25 +555,27 @@
     .welcome-strip {
       position: relative;
       display: grid;
-      min-height: 260px;
+      width: min(100%, 475px);
+      aspect-ratio: 425 / 445;
+      margin: 0 auto;
       place-items: center;
-      padding: 42px 20px;
-      overflow: hidden;
-      background-color: #81766b;
-      background-image: url("assets/paper-frame.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      padding: 0;
+      isolation: isolate;
+      background: transparent;
     }
 
-    .welcome-strip::before {
+    .welcome-strip__paper {
       position: absolute;
+      z-index: 0;
       inset: 0;
-      background: rgba(65, 56, 48, 0.18);
-      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      pointer-events: none;
     }
 
-    .welcome-strip img {
+    .welcome-strip__note {
       position: relative;
       z-index: 1;
       display: block;
@@ -540,14 +587,9 @@
       position: relative;
       z-index: 2;
       width: min(100% - 36px, 980px);
-      margin: -35px auto 0;
+      margin: 0 auto;
       padding: 50px 42px 54px;
-      background-color: #f8f6f0;
-      background-image: url("assets/paper-pearl.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      box-shadow: 0 12px 32px rgba(78, 66, 50, 0.1);
+      background: transparent;
     }
 
     .details__title {
@@ -611,26 +653,20 @@
     }
 
     .directions {
+      --slide-color: #81766b;
+      --slide-image: linear-gradient(rgba(65, 56, 48, 0.68), rgba(65, 56, 48, 0.68)), url("assets/paper-brown.png");
+      --slide-position: center, center;
+      --slide-repeat: no-repeat, no-repeat;
+      --slide-size: cover, cover;
       position: relative;
       display: grid;
       min-height: 280px;
       place-items: center;
       padding: 55px 22px 65px;
-      overflow: hidden;
-      background-color: #81766b;
-      background-image: url("assets/paper-frame.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      overflow: visible;
+      background: transparent;
       color: #fff;
       text-align: center;
-    }
-
-    .directions::before {
-      position: absolute;
-      inset: 0;
-      background: rgba(65, 56, 48, 0.68);
-      content: "";
     }
 
     .directions__inner {
@@ -683,27 +719,21 @@
     }
 
     .closing {
+      --slide-color: #80746a;
+      --slide-image: linear-gradient(rgba(53, 47, 41, 0.28), rgba(53, 47, 41, 0.28)), url("assets/paper-brown.png");
+      --slide-position: center, center;
+      --slide-repeat: no-repeat, no-repeat;
+      --slide-size: cover, cover;
       position: relative;
       display: grid;
       min-height: 610px;
       align-content: center;
       justify-items: center;
       padding: 80px 22px 92px;
-      overflow: hidden;
-      background-color: #80746a;
-      background-image: url("assets/paper-torn-brown.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      overflow: visible;
+      background: transparent;
       color: #fff;
       text-align: center;
-    }
-
-    .closing::before {
-      position: absolute;
-      inset: 0;
-      background: rgba(53, 47, 41, 0.28);
-      content: "";
     }
 
     .closing__inner {
@@ -762,11 +792,17 @@
     }
 
     .footer {
+      --slide-color: #fff;
+      --slide-image: url("assets/paper-ivory.webp");
+      --slide-position: center top;
+      --slide-repeat: no-repeat;
+      --slide-size: cover;
+      position: relative;
       display: grid;
       min-height: 150px;
       place-items: center;
       padding: 25px 20px;
-      background: #fff;
+      background: transparent;
     }
 
     .footer img {
@@ -827,10 +863,10 @@
       .countdown {
         padding-top: 115px;
         padding-bottom: 125px;
-        background-image: url("assets/leaf-ornament.png");
-        background-position: center bottom;
-        background-repeat: no-repeat;
-        background-size: min(100%, 1280px) auto;
+        --slide-image: url("assets/leaf-ornament.png");
+        --slide-position: center bottom;
+        --slide-repeat: no-repeat;
+        --slide-size: min(100%, 1280px) auto;
       }
 
       .story {
@@ -842,11 +878,10 @@
       }
 
       .welcome-strip {
-        min-height: 300px;
+        width: min(100%, 560px);
       }
 
       .details {
-        margin-top: -70px;
         padding: 65px 58px 70px;
       }
 
@@ -856,6 +891,15 @@
     }
 
     @media (max-width: 767px) {
+      .torn-slide {
+        --slide-mask: url("assets/torn-top-mobile.png");
+        --slide-overlap: clamp(28px, 6vw, 48px);
+      }
+
+      .torn-slide--alternate {
+        --slide-mask: url("assets/torn-bottom-mobile.png");
+      }
+
       body {
         font-size: 16px;
       }
@@ -877,10 +921,10 @@
 
       .countdown {
         padding: 54px 14px 61px;
-        background-image: url("assets/paper-brown.png");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        --slide-image: url("assets/paper-brown.png");
+        --slide-position: center;
+        --slide-repeat: no-repeat;
+        --slide-size: cover;
       }
 
       .countdown__heading {
@@ -920,9 +964,6 @@
 
       .story {
         min-height: 735px;
-        background-image: url("assets/paper-garden.png");
-        background-position: center top;
-        background-size: cover;
       }
 
       .portrait-frame {
@@ -957,19 +998,17 @@
       }
 
       .welcome-strip {
-        min-height: 205px;
-        padding: 32px 18px;
+        width: min(100%, 425px);
       }
 
-      .welcome-strip img {
+      .welcome-strip__note {
         width: 94%;
       }
 
       .details {
         width: min(100% - 20px, 500px);
-        margin-top: -15px;
+        margin-top: 0;
         padding: 42px 18px 36px;
-        background-image: url("assets/paper-pearl.png");
       }
 
       .details__title {
@@ -1014,7 +1053,6 @@
       .directions {
         min-height: 235px;
         padding: 44px 15px 52px;
-        background-image: url("assets/paper-frame.png");
       }
 
       .directions h2 {
@@ -1039,7 +1077,6 @@
       .closing {
         min-height: 570px;
         padding: 68px 17px 78px;
-        background-image: url("assets/paper-torn-brown.png");
       }
 
       .closing__message {
@@ -1129,7 +1166,7 @@
       </a>
     </section>
 
-    <section class="countdown" id="countdown" aria-labelledby="countdown-title">
+    <section class="countdown torn-slide" id="countdown" aria-labelledby="countdown-title">
       <div class="countdown__inner">
         <h1 class="countdown__heading" id="countdown-title">the celebration begins in</h1>
         <div class="countdown__grid" data-countdown data-date="1790870520" aria-label="شمارش معکوس تا مراسم">
@@ -1149,48 +1186,51 @@
       </div>
     </section>
 
-    <section class="story" id="story" aria-label="خاطره&zwnj;ای از محبوبه و محمد">
-      <div class="story__inner">
-        <!-- PHOTO SLOT: replace the empty oval with the couple's portrait when it is ready. -->
-        <div class="portrait-frame" data-photo-slot="portrait" role="img" aria-label="جای عکس پرتره عروس و داماد">
-          <div class="portrait-frame__photo">
-            <span class="portrait-frame__placeholder" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 7.5h3l1.3-2h7.4l1.3 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
-              <span>جای عکس</span>
-            </span>
+    <div class="story-stack torn-slide torn-slide--alternate">
+      <section class="story" id="story" aria-label="خاطره&zwnj;ای از محبوبه و محمد">
+        <div class="story__inner">
+          <!-- PHOTO SLOT: replace the empty oval with the couple's portrait when it is ready. -->
+          <div class="portrait-frame" data-photo-slot="portrait" role="img" aria-label="جای عکس پرتره عروس و داماد">
+            <div class="portrait-frame__photo">
+              <span class="portrait-frame__placeholder" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 7.5h3l1.3-2h7.4l1.3 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+                <span>جای عکس</span>
+              </span>
+            </div>
           </div>
+          <img class="story__quote" src="assets/love-poem.png" alt="دعوت&zwnj;نامه&zwnj;ای از طرف محبوبه و محمد">
         </div>
-        <img class="story__quote" src="assets/love-poem.png" alt="دعوت&zwnj;نامه&zwnj;ای از طرف محبوبه و محمد">
-      </div>
-    </section>
+      </section>
 
-    <section class="welcome-strip" aria-label="پیام خوش&zwnj;آمدگویی">
-      <img src="assets/welcome-note.png" alt="پیام خوش&zwnj;آمدگویی محبوبه و محمد">
-    </section>
+      <section class="welcome-strip" aria-label="پیام خوش&zwnj;آمدگویی">
+        <img class="welcome-strip__paper" src="assets/paper-frame.png" alt="" aria-hidden="true">
+        <img class="welcome-strip__note" src="assets/welcome-note.png" alt="پیام خوش&zwnj;آمدگویی محبوبه و محمد">
+      </section>
 
-    <section class="details" id="details" aria-labelledby="details-title">
-      <h2 class="details__title" id="details-title">موعد دیدار ما</h2>
-      <img class="details__ornament" src="assets/ornament.png" alt="" aria-hidden="true">
-      <div class="details__grid">
-        <article class="detail-card">
-          <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path><path d="M7 14h3M7 17h3"></path></svg>
-          <h3>تاریخ مراسم:</h3>
-          <p>پنجشنبه، 9 مهر ماه، 1405</p>
-        </article>
-        <article class="detail-card">
-          <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
-          <h3>ساعت مراسم:</h3>
-          <p dir="rtl">19:00 تا خاموشی ستارگان</p>
-        </article>
-        <article class="detail-card">
-          <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-          <h3>باغ عمارت سران<br>(دیاموند سابق)</h3>
-          <p>اتوبان آزادگان شمال به جنوب، خروجی فتح غرب، لاین کندرو به سمت احمدآباد مستوفی، نرسیده به میدان پیامبر، خیابان بسیج، کوچه الماس، پلاک ۱۱۰</p>
-        </article>
-      </div>
-    </section>
+      <section class="details" id="details" aria-labelledby="details-title">
+        <h2 class="details__title" id="details-title">موعد دیدار ما</h2>
+        <img class="details__ornament" src="assets/ornament.png" alt="" aria-hidden="true">
+        <div class="details__grid">
+          <article class="detail-card">
+            <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path><path d="M7 14h3M7 17h3"></path></svg>
+            <h3>تاریخ مراسم:</h3>
+            <p>پنجشنبه، 9 مهر ماه، 1405</p>
+          </article>
+          <article class="detail-card">
+            <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
+            <h3>ساعت مراسم:</h3>
+            <p dir="rtl">19:00 تا خاموشی ستارگان</p>
+          </article>
+          <article class="detail-card">
+            <svg class="detail-card__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+            <h3>باغ عمارت سران<br>(دیاموند سابق)</h3>
+            <p>اتوبان آزادگان شمال به جنوب، خروجی فتح غرب، لاین کندرو به سمت احمدآباد مستوفی، نرسیده به میدان پیامبر، خیابان بسیج، کوچه الماس، پلاک ۱۱۰</p>
+          </article>
+        </div>
+      </section>
+    </div>
 
-    <section class="directions" aria-labelledby="directions-title">
+    <section class="directions torn-slide" aria-labelledby="directions-title">
       <div class="directions__inner">
         <h2 id="directions-title">مسیر&zwnj;یابی</h2>
         <p>اپلیکیشن مورد نظرتان را انتخاب کنید</p>
@@ -1202,7 +1242,7 @@
       </div>
     </section>
 
-    <section class="closing" aria-labelledby="closing-title">
+    <section class="closing torn-slide torn-slide--alternate" aria-labelledby="closing-title">
       <div class="closing__inner">
         <div class="closing__mark" aria-label="حروف آغازین محبوبه و محمد">M&amp;M</div>
         <h2 class="closing__message" id="closing-title">بی&zwnj;صبرانه منتظر دیدار شما و ثبت خاطره&zwnj;ای زیبا در کنار عزیزانمان هستیم.</h2>
@@ -1213,7 +1253,7 @@
       </div>
     </section>
 
-  <footer class="footer">
+  <footer class="footer torn-slide">
       <img src="assets/footer-contact.png" alt="راه&zwnj;های ارتباطی کارت دیجیتال کیمیان">
     </footer>
   </main>
