@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#8f8377">
   <title>کارت دعوت عروسی محبوبه و محمد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap">
   <style>
     @font-face {
       font-family: "B Homa";
@@ -28,7 +31,7 @@
       --gold-light: #f2e4c3;
       --cream: #f8f5ee;
       --paper: #eee9e0;
-      --font-fa: "B Homa", Tahoma, sans-serif;
+      --font-fa: "Noto Nastaliq Urdu", "B Homa", Tahoma, sans-serif;
       --font-en: "Alex Brush", Georgia, serif;
       font-synthesis: none;
       scroll-behavior: smooth;
@@ -99,7 +102,7 @@
       background: #e9e4db;
       opacity: 1;
       visibility: visible;
-      transition: opacity 650ms ease, visibility 650ms ease;
+      transition: opacity 775ms ease, visibility 775ms ease;
     }
 
     .envelope.is-fading {
@@ -127,7 +130,7 @@
 
     .envelope__door {
       z-index: 2;
-      transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 3.35s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
     }
 
@@ -146,7 +149,7 @@
       z-index: 4;
       display: grid;
       place-items: center;
-      transition: opacity 550ms ease;
+      transition: opacity 875ms ease;
     }
 
     .envelope__seal img {
@@ -224,7 +227,7 @@
       inset: 0;
     }
 
-    /* Empty cover-photo slot. Replace this layer with the couple's photo later. */
+    /* Cover photo lives here; the gradient behind it is only a loading fallback. */
     .hero__photo {
       background:
         radial-gradient(ellipse at 50% 35%, rgba(241, 229, 211, 0.82) 0, rgba(210, 196, 176, 0.25) 34%, transparent 68%),
@@ -232,6 +235,13 @@
         radial-gradient(ellipse at 84% 66%, rgba(90, 81, 71, 0.42) 0, transparent 42%),
         linear-gradient(145deg, #d2c8ba 0%, #a69a8b 42%, #6f665c 100%);
       transform: scale(1.02);
+    }
+
+    .hero__photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .hero__shade {
@@ -524,22 +534,11 @@
       text-align: center;
     }
 
-    .portrait-frame__placeholder {
-      display: grid;
-      justify-items: center;
-      gap: 5px;
-      font-size: 13px;
-      text-shadow: 0 1px 5px rgba(36, 32, 27, 0.4);
-    }
-
-    .portrait-frame__placeholder svg {
-      width: 30px;
-      height: 30px;
-      fill: none;
-      stroke: currentColor;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-width: 1.5;
+    .portrait-frame__photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .story__quote {
@@ -811,6 +810,52 @@
       height: auto;
     }
 
+    /* Nastaliq rhythm: the tall script needs generous line boxes. */
+    body {
+      line-height: 2.5;
+    }
+
+    .hero__names {
+      line-height: 2.2;
+    }
+
+    .countdown__label {
+      line-height: 2.4;
+    }
+
+    .details__title {
+      line-height: 2.2;
+    }
+
+    .detail-card h3 {
+      line-height: 2.3;
+    }
+
+    .detail-card p {
+      line-height: 2.5;
+    }
+
+    .directions h2 {
+      line-height: 2.2;
+    }
+
+    .directions p {
+      line-height: 2.4;
+    }
+
+    .closing__message {
+      line-height: 2.6;
+    }
+
+    .closing__family {
+      line-height: 2.4;
+    }
+
+    .envelope__hint {
+      font-size: 16px;
+      line-height: 2.4;
+    }
+
     .music-control {
       position: fixed;
       z-index: 999;
@@ -950,7 +995,7 @@
 
       .countdown__label {
         margin-top: 7px;
-        font-size: 11px;
+        font-size: 13px;
         letter-spacing: 0;
       }
 
@@ -980,16 +1025,6 @@
 
       .portrait-frame__photo {
         border-width: 2px;
-      }
-
-      .portrait-frame__placeholder {
-        gap: 3px;
-        font-size: 12px;
-      }
-
-      .portrait-frame__placeholder svg {
-        width: 25px;
-        height: 25px;
       }
 
       .story__quote {
@@ -1153,8 +1188,9 @@
 
   <main id="invitation">
     <section class="hero" id="home" aria-label="دعوت&zwnj;نامه عروسی محبوبه و محمد">
-      <!-- PHOTO SLOT: add the main couple photo as the hero background here. -->
-      <div class="hero__photo" data-photo-slot="cover" role="img" aria-label="جای عکس اصلی عروس و داماد"></div>
+      <div class="hero__photo" data-photo-slot="cover">
+        <img src="assets/Pic.JPG" alt="عکس عروس و داماد">
+      </div>
       <div class="hero__shade" aria-hidden="true"></div>
       <div class="hero__drape" aria-hidden="true">
         <img src="assets/hero-drape.png" alt="">
@@ -1189,13 +1225,9 @@
     <div class="story-stack torn-slide torn-slide--alternate">
       <section class="story" id="story" aria-label="خاطره&zwnj;ای از محبوبه و محمد">
         <div class="story__inner">
-          <!-- PHOTO SLOT: replace the empty oval with the couple's portrait when it is ready. -->
-          <div class="portrait-frame" data-photo-slot="portrait" role="img" aria-label="جای عکس پرتره عروس و داماد">
+          <div class="portrait-frame" data-photo-slot="portrait">
             <div class="portrait-frame__photo">
-              <span class="portrait-frame__placeholder" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 7.5h3l1.3-2h7.4l1.3 2h3A1.5 1.5 0 0 1 21.5 9v9a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 18V9A1.5 1.5 0 0 1 4 7.5Z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
-                <span>جای عکس</span>
-              </span>
+              <img src="assets/Ring.JPG" alt="عکس عروس و داماد">
             </div>
           </div>
           <img class="story__quote" src="assets/love-poem.png" alt="دعوت&zwnj;نامه&zwnj;ای از طرف محبوبه و محمد">
@@ -1299,8 +1331,8 @@
         musicButton.classList.add("is-visible");
         playMusic();
 
-        window.setTimeout(() => envelope.classList.add("is-fading"), 1050);
-        window.setTimeout(() => envelope.remove(), 1750);
+        window.setTimeout(() => envelope.classList.add("is-fading"), 2775);
+        window.setTimeout(() => envelope.remove(), 3625);
       }
 
       openButton.addEventListener("click", openEnvelope);
