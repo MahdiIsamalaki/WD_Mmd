@@ -31,6 +31,7 @@
       --gold-light: #f2e4c3;
       --cream: #f8f5ee;
       --paper: #eee9e0;
+      --countdown-overlap: clamp(92px, 21vw, 480px);
       --font-fa: "Noto Nastaliq Urdu", "B Homa", Tahoma, sans-serif;
       --font-en: "Alex Brush", Georgia, serif;
       font-synthesis: none;
@@ -300,7 +301,7 @@
     .hero__scroll {
       position: absolute;
       z-index: 2;
-      bottom: max(26px, env(safe-area-inset-bottom));
+      bottom: calc(var(--countdown-overlap) + 20px);
       left: 50%;
       display: grid;
       width: 48px;
@@ -459,6 +460,10 @@
 
     .torn-slide--alternate {
       --slide-mask: url("assets/torn-bottom-wide.png");
+    }
+
+    section.countdown {
+      --slide-overlap: var(--countdown-overlap);
     }
 
     .story-stack {
